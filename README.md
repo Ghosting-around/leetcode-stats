@@ -1,20 +1,16 @@
-# 📊 LeetCode Stats
+# LeetCode Stats
 
-## 🏆 My Progress
+## 📊 My Progress
 
-![LeetCode Stats](https://leetcard.jacoblin.cool/your_username?theme=dark&font=Inter)
+![LeetCode Stats](https://leetcard.jacoblin.cool/Ghost_taker?theme=dark&font=Inter&ext=heatmap)
 
 ## 🔥 Daily Streak
 
-![LeetCode Streak](https://leetcode-stats-api.herokuapp.com/Ghost_taker)
+![LeetCode Streak](https://leetcode-badge-showcase.vercel.app/api?username=Ghost_taker&animated=true)
 
 ## 📈 Solved Problems
 
-| Difficulty | Count |
-|------------|-------|
-| 🟢 Easy | 0 |
-| 🟡 Medium | 0 |
-| 🔴 Hard | 0 |
+![LeetCode Stats](https://leetcode-stats-api.herokuapp.com/Ghost_taker)
 
 ---
-*Auto-updated daily via GitHub Actions*
+*Auto-updated daily*
