@@ -1,0 +1,68 @@
+name: Update LeetCode Stats
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      
+      - name: Install dependencies
+        run: pip install requests
+      
+      - name: Update stats
+        run: |
+          python -c '
+          import requests
+          
+          USERNAME = "Ghost_taker"  # CHANGE THIS
+          url = f"https://leetcode-api-faisalshohag.vercel.app/{USERNAME}"
+          data = requests.get(url).json()
+          
+          total = data.get("totalSolved", 0)
+          easy = data.get("easySolved", 0)
+          medium = data.get("mediumSolved", 0)
+          hard = data.get("hardSolved", 0)
+          streak = data.get("streak", 0)
+          
+          readme = """# LeetCode Stats
+          
+          ## Overall Progress
+          - Total Solved: """ + str(total) + """
+          - Easy: """ + str(easy) + """
+          - Medium: """ + str(medium) + """
+          - Hard: """ + str(hard) + """
+          
+          ## Current Streak
+          - """ + str(streak) + """ days
+          
+          ## Progress Chart
+          ![LeetCode Stats](https://leetcard.jacoblin.cool/""" + USERNAME + """?theme=dark&font=Inter)
+          
+          ---
+          *Auto-updated daily*
+          """
+          
+          with open("README.md", "w") as f:
+              f.write(readme)
+          print("✅ Stats updated!")
+          '
+      
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || git commit -m "Update LeetCode stats"
+          git push
